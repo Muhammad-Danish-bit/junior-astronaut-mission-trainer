@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Junior Astronaut Mission Trainer | NASA Mission Control</title>
+  <meta name="description" content="A futuristic NASA-inspired space exploration simulation built with HTML, CSS, JavaScript and Phaser 3.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/rockets.css">
+  <link rel="stylesheet" href="css/surface.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- Phaser 3 Game Engine Library (Local offline bundle) -->
+  <script src="js/phaser.min.js"></script>
+</head>
+<body>
+  <!-- Phaser 3 Interactive Background Canvas (Earth, Starfield, ISS, Particles) -->
+  <div id="phaser-bg-container"></div>
+
+  <!-- Authentic NASA Pre-Flight Loading Screen / Splash Sequence -->
+  <div class="loading-screen" id="app-loader">
+    <div class="loader-badge">🚀</div>
+    <div class="loader-title">Junior Astronaut Mission Trainer</div>
+    <div class="loader-subtitle">NASA Space Apps Challenge • Planetary Exploration Division</div>
+    <div class="loader-track">
+      <div class="loader-fill" id="loader-progress-fill"></div>
+    </div>
+    <div class="loader-status" id="loader-status-text">
+      Calibrating Life Support ECLSS Vitals & Orbit Trackers...
+    </div>
+  </div>
+
+  <div id="app">
+    <!-- Top Mission Control Navigation & Telemetry Banner -->
+    <header class="mc-header">
+      <div class="brand-section">
+        <div class="nasa-meatball" id="header-logo" title="NASA Space Apps Challenge • Click to return to Menu">🚀</div>
+        <div class="title-group">
+          <h1>Junior Astronaut Mission Trainer</h1>
+          <div class="subtitle">NASA Space Apps Challenge • Deep Space Mission Control</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- View Switcher -->
+        <button class="btn-secondary btn-header-nav" id="btn-header-menu" title="Return to Main Menu">
+          🏠 Menu
+        </button>
+        <button class="btn-secondary btn-header-nav" id="btn-header-dashboard" title="Open Mission Control Dashboard">
+          📊 Dashboard
+        </button>
+        <button class="btn-secondary btn-header-nav" id="btn-header-hangar" title="Open Rocket Hangar">
+          🛸 Hangar
+        </button>
+        <button class="btn-secondary btn-header-nav" id="btn-header-nasa" title="Live NASA Mission Feeds (ISS, Asteroids, Mars, Space Weather)">
+          🛰️ NASA Live
+        </button>
+        <button class="btn-secondary btn-header-nav btn-header-guide" id="btn-header-guide" title="Complete Step-by-Step Mission Guide & Guidelines" style="border-color: var(--accent-gold); color: #ffe082;">
+          📖 Guide
+        </button>
+
+        <!-- Rank Badge -->
+        <div class="astronaut-badge" id="hud-rank">
+          <span class="badge-icon">🌱</span>
+          <span class="badge-name">Cadet Alex</span>
+        </div>
+
+        <!-- Science Points Counter -->
+        <div class="score-counter" id="hud-score">
+          <span>⭐</span>
+          <span class="score-val">0</span>
+          <span>Pts</span>
+        </div>
+
+        <!-- Music Toggle Button -->
+        <button class="btn-icon" id="btn-toggle-music" title="Toggle Cosmic Ambient Music" aria-label="Toggle Music">
+          🎵
+        </button>
+
+        <!-- Sound SFX Toggle Button -->
+        <button class="btn-icon" id="btn-toggle-sound" title="Toggle Sound SFX" aria-label="Toggle Sound">
+          🔊
+        </button>
+
+        <!-- Quindar Beep Test Button -->
+        <button class="btn-icon" id="btn-quindar-test" title="NASA Apollo/Artemis Quindar Beep" aria-label="Quindar Beep">
+          📡
+        </button>
+      </div>
+    </header>
+
+    <!-- Active Screens Container (The Complete 9-Stage Mission Journey) -->
+    <main id="screens-wrapper">
+      <!-- Stage 1: Futuristic NASA Main Menu -->
+      <section id="screen-title" class="screen-container active">
+        <div class="title-screen-layout">
+          <div class="title-hero-card">
+            <div class="title-hero-badge">🚀</div>
+            <h1 class="title-main-heading">JUNIOR ASTRONAUT<br>MISSION TRAINER</h1>
+            <div class="title-tagline">NASA Space Apps Challenge • Deep Space Survival</div>
+            
+            <p class="title-desc">
+              Step into the boots of an astronaut commander! Balance life support vitals, load exploration spacecraft, execute atmospheric countdowns, land on extraterrestrial worlds with realistic gravity, and construct permanent surface base camps beneath deep space hazards.
+            </p>
+
+            <!-- Big Glowing Primary Start Mission Button -->
+            <div class="title-cta-group">
+              <button class="btn-start-mission" id="btn-title-start-mission">
+                <span>START MISSION</span>
+                <span>🚀</span>
+              </button>
+              <button class="btn-secondary btn-title-dash" id="btn-title-open-dashboard">
+                <span>OPEN DASHBOARD</span>
+                <span>📊</span>
+              </button>
+            </div>
+
+            <!-- Title Menu Quick Navigation Actions -->
+            <div class="title-menu-actions">
+              <button class="btn-secondary" id="btn-title-rocket">
+                <span>🛸 Rocket Selection</span>
+              </button>
+              <button class="btn-secondary" id="btn-title-astronaut">
+                <span>👨‍🚀 Astronaut Prep</span>
+              </button>
+              <button class="btn-secondary" id="btn-title-briefing">
+                <span>📋 Mission Briefing</span>
+              </button>
+              <button class="btn-secondary" id="btn-title-achievements">
+                <span>🏆 Achievements</span>
+              </button>
+              <button class="btn-secondary" id="btn-title-guide" style="border-color: var(--accent-gold); color: #ffe082;">
+                <span>📖 Mission Guide</span>
+              </button>
+              <button class="btn-secondary btn-replay-intro" id="btn-title-intro" title="Replay the mission intro cinematic">
+                <span>🎬 Watch Intro</span>
+              </button>
+            </div>
+
+            <!-- Planetary Levels Preview Pills -->
+            <div class="planet-pills-row">
+              <div class="planet-pill" id="pill-title-moon">
+                <span>🌕</span>
+                <span>Level 1: The Moon</span>
+              </div>
+              <div class="planet-pill" id="pill-title-mars">
+                <span>🔴</span>
+                <span>Level 2: Mars</span>
+              </div>
+              <div class="planet-pill" id="pill-title-europa">
+                <span>❄️</span>
+                <span>Level 3: Europa</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stage 2: Mission Control Telemetry Dashboard -->
+      <section id="screen-dashboard" class="screen-container"></section>
+
+      <!-- Stage 2: Rocket Selection & Cargo Bay -->
+      <section id="screen-rocket-select" class="screen-container"></section>
+
+      <!-- Stage 3: Launchpad 39B & Crew Boarding Checklist -->
+      <section id="screen-boarding" class="screen-container"></section>
+
+      <!-- Stage 3 & 4: Countdown & Space Flight Simulator -->
+      <section id="screen-launch" class="screen-container"></section>
+
+      <!-- Stage 4.5: Deep Space Mission Controller & Real-Time Comm Link (Earth <-> Moon/Mars) -->
+      <section id="screen-transit" class="screen-container"></section>
+
+      <!-- Stage 5: Planetary Descent & Retro-Lander Simulator -->
+      <section id="screen-lander" class="screen-container"></section>
+
+      <!-- Stage 6, 7 & 8: Planetary Surface Camp & Exploration Missions -->
+      <section id="screen-surface" class="screen-container"></section>
+
+      <!-- Stage 9: Mission Debrief & Flight Report Card -->
+      <section id="screen-debrief" class="screen-container"></section>
+
+      <!-- Stage 9: Mission Failed / Emergency Abort -->
+      <section id="screen-failed" class="screen-container"></section>
+    </main>
+
+    <!-- NASA Science News & Trivia Ticker -->
+    <footer class="nasa-ticker">
+      <span class="ticker-tag">NASA Live Feed</span>
+      <span class="ticker-content" id="live-ticker-text">
+        Artemis program preparing humanity to return to the Moon and voyage onward to Mars!
+      </span>
+    </footer>
+
+    <!-- Modal Dialogs Container -->
+    <div id="modal-container"></div>
+  </div>
+
+  <!-- Live NASA Data Feeds API -->
+  <script src="js/nasa.js"></script>
+
+  <!-- Direct Unified Game Engine & All 9 Stages Bundle -->
+  <script src="js/bundle.js"></script>
+
+  <script>
+    // Safety failsafe: Ensure loading screen NEVER blocks clicks or stays stuck
+    setTimeout(function() {
+      var loader = document.getElementById('app-loader');
+      if (loader) {
+        loader.classList.add('hidden');
+        loader.style.pointerEvents = 'none';
+        setTimeout(function() { loader.style.display = 'none'; }, 300);
+      }
+    }, 500);
+
+    var loaderEl = document.getElementById('app-loader');
+    if (loaderEl) {
+      loaderEl.onclick = function() {
+        loaderEl.classList.add('hidden');
+        loaderEl.style.display = 'none';
+        loaderEl.style.pointerEvents = 'none';
+      };
+    }
+  </script>
+</body>
+</html>

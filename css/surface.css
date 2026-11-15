@@ -1,0 +1,235 @@
+/* ==========================================================================
+   CREW BOARDING, CHECKLIST, LAUNCH, AND SURFACE CAMP STYLES
+   ========================================================================== */
+
+/* Crew Boarding & Checklist Layout */
+.boarding-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .boarding-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.boarding-panel, .checklist-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-panel);
+}
+
+.astronaut-dragger {
+  width: 90px;
+  height: 110px;
+  background: rgba(0, 229, 255, 0.15);
+  border: 2px dashed var(--border-cyan);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  cursor: grab;
+  touch-action: none;
+  transition: transform 0.15s, background 0.2s;
+  user-select: none;
+}
+
+.astronaut-dragger:active {
+  cursor: grabbing;
+  transform: scale(1.08);
+  background: rgba(0, 229, 255, 0.3);
+}
+
+.cockpit-dropzone {
+  min-height: 180px;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.35);
+  transition: all 0.25s ease;
+  margin-top: 16px;
+}
+
+.cockpit-dropzone.drag-over {
+  border-color: var(--text-highlight);
+  background: rgba(0, 230, 118, 0.15);
+}
+
+.cockpit-dropzone.boarded {
+  border-color: var(--text-highlight);
+  background: rgba(0, 230, 118, 0.12);
+  border-style: solid;
+}
+
+/* Checklist Items */
+.checklist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.check-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-cyan);
+}
+
+.check-item.completed {
+  border-color: var(--text-highlight);
+  background: rgba(0, 230, 118, 0.08);
+}
+
+.check-box-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.check-item.completed .check-box-icon {
+  background: var(--text-highlight);
+  border-color: var(--text-highlight);
+  color: #000;
+}
+
+/* Launch Canvas & Flight Container */
+.flight-canvas-container {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: #02040a;
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-panel), var(--shadow-glow);
+}
+
+canvas.game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Countdown Overlay */
+.countdown-overlay {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 16, 28, 0.85);
+  border: 2px solid var(--accent-gold);
+  border-radius: var(--radius-md);
+  padding: 12px 32px;
+  font-size: 2.2rem;
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 214, 0, 0.5);
+  z-index: 10;
+}
+
+/* Surface Camp Builder Layout */
+.surface-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .surface-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.surface-toolbox {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.module-card-draggable {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  cursor: grab;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s;
+}
+
+.module-card-draggable:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: var(--border-cyan);
+  transform: translateY(-2px);
+}
+
+.surface-canvas-wrapper {
+  position: relative;
+  height: 520px;
+  background: #0f1523;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+/* Hazard Alert Banner */
+.hazard-banner {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 51, 102, 0.92);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 0 30px rgba(255, 51, 102, 0.8);
+  z-index: 20;
+  animation: hazardStrobe 1s infinite alternate;
+}
+
+@keyframes hazardStrobe {
+  from { transform: translateX(-50%) scale(0.98); }
+  to { transform: translateX(-50%) scale(1.02); }
+}
+

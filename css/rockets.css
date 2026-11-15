@@ -1,0 +1,415 @@
+/* ==========================================================================
+   ROCKET SELECTION, CARGO BAY & DIFFICULTY PRESET STYLES
+   ========================================================================== */
+
+.hangar-layout {
+  display: grid;
+  grid-template-columns: 1fr 450px;
+  gap: 24px;
+}
+
+@media (max-width: 1080px) {
+  .hangar-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rocket-hangar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hangar-header {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hangar-header h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rocket-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 820px) {
+  .rocket-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rocket-card {
+  background: var(--bg-panel);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 12px;
+}
+
+.rocket-card:hover:not(.locked) {
+  transform: translateY(-4px);
+  border-color: var(--border-cyan);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-panel-hover);
+}
+
+.rocket-card.selected {
+  border-color: var(--border-cyan);
+  background: rgba(16, 32, 60, 0.95);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.35);
+}
+
+.rocket-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.7);
+}
+
+.rocket-card-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(0, 229, 255, 0.15);
+  color: var(--border-cyan);
+  align-self: flex-start;
+}
+
+.rocket-visual {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.rocket-svg-container {
+  width: 90px;
+  height: 130px;
+  filter: drop-shadow(0 8px 16px rgba(0, 229, 255, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.rocket-card:hover .rocket-svg-container {
+  transform: translateY(-6px);
+}
+
+.rocket-info h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.rocket-info .rocket-tier {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.rocket-desc {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #cfd8dc;
+  margin: 4px 0;
+}
+
+.rocket-stat-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-bar-track {
+  width: 90px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: var(--border-cyan);
+  border-radius: 4px;
+}
+
+.rocket-lock-badge {
+  display: none;
+  background: rgba(255, 51, 102, 0.15);
+  border: 1px solid var(--accent-red);
+  color: #ff80ab;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.rocket-card.locked .rocket-lock-badge {
+  display: block;
+}
+
+/* Cargo Bay Equipment Selection (Limited Slots) */
+.cargo-selection-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cargo-slots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cargo-slots-indicator {
+  display: flex;
+  gap: 8px;
+}
+
+.cargo-slot-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--border-cyan);
+}
+
+.cargo-slot-dot.filled {
+  background: var(--text-highlight);
+  box-shadow: 0 0 8px var(--text-highlight);
+}
+
+.cargo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.cargo-item-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.cargo-item-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-cyan);
+}
+
+.cargo-item-card.equipped {
+  border-color: var(--text-highlight);
+  background: rgba(0, 230, 118, 0.12);
+}
+
+/* Difficulty Preset Buttons */
+.difficulty-selector {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-diff {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.btn-diff.active {
+  border-color: var(--accent-gold);
+  background: rgba(255, 214, 0, 0.15);
+  color: var(--accent-gold);
+}
+
+/* Supply Loading Station */
+.supply-station {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-panel);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.station-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.destination-reminder {
+  background: rgba(0, 229, 255, 0.08);
+  border-left: 3px solid var(--border-cyan);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.supply-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.supply-row {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.supply-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.supply-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.supply-meta {
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--border-cyan);
+}
+
+.supply-slider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-step {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.btn-step:hover {
+  background: var(--border-cyan);
+  color: #000;
+}
+
+input[type="range"].supply-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"].supply-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--border-cyan);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--border-cyan);
+}
+
+.payload-warning-box {
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.payload-warning-box.warning {
+  background: rgba(255, 145, 0, 0.15);
+  border: 1px solid var(--meter-food);
+  color: #ffe082;
+}
+
+.payload-warning-box.nominal {
+  background: rgba(0, 230, 118, 0.12);
+  border: 1px solid var(--text-highlight);
+  color: #b9f6ca;
+}
+
+.payload-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
